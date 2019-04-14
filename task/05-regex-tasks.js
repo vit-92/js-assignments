@@ -30,8 +30,8 @@
  *
  * @return {RegExp}
  */
-function getRegexForGuid() {
-   throw new Error('Not implemented');
+function getRegexForGuid () {
+  return /\{[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\}/;
 }
 
 
@@ -52,8 +52,8 @@ function getRegexForGuid() {
  * @return {RegExp}
  *
  */
-function getRegexForPitSpot() {
-   throw new Error('Not implemented');
+function getRegexForPitSpot () {
+  throw new Error('Not implemented');
 }
 
 
@@ -71,8 +71,8 @@ function getRegexForPitSpot() {
  *
  * @return {RegExp}
  */
-function getRegexForIPv4() {
-   throw new Error('Not implemented');
+function getRegexForIPv4 () {
+  throw new Error('Not implemented');
 }
 
 
@@ -90,8 +90,8 @@ function getRegexForIPv4() {
  *                                   '0S4-H1-HACK'
  * @return {RegExp}
  */
-function getRegexForSSN() {
-   throw new Error('Not implemented');
+function getRegexForSSN () {
+  throw new Error('Not implemented');
 }
 
 
@@ -115,15 +115,15 @@ function getRegexForSSN() {
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
-function getPasswordValidator(minLength) {
-   throw new Error('Not implemented');
+function getPasswordValidator (minLength) {
+  throw new Error('Not implemented');
 }
 
 
 module.exports = {
-    getRegexForGuid: getRegexForGuid,
-    getRegexForPitSpot: getRegexForPitSpot,
-    getRegexForIPv4: getRegexForIPv4,
-    getRegexForSSN: getRegexForSSN,
-    getPasswordValidator: getPasswordValidator
+  getRegexForGuid: getRegexForGuid,
+  getRegexForPitSpot: getRegexForPitSpot,
+  getRegexForIPv4: getRegexForIPv4,
+  getRegexForSSN: getRegexForSSN,
+  getPasswordValidator: getPasswordValidator
 };

@@ -21,8 +21,9 @@
  *    'Tue, 26 Jan 2016 13:48:02 GMT' => Date()
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
-function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+function parseDataFromRfc2822 (value) {
+  var date = new Date(value);
+  return date;
 }
 
 /**
@@ -36,8 +37,9 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T16:07:37+00:00'    => Date()
  *    '2016-01-19T08:07:37Z' => Date()
  */
-function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+function parseDataFromIso8601 (value) {
+  var date = new Date(value);
+  return date;
 }
 
 
@@ -55,8 +57,14 @@ function parseDataFromIso8601(value) {
  *    Date(2012,1,1)    => true
  *    Date(2015,1,1)    => false
  */
-function isLeapYear(date) {
-   throw new Error('Not implemented');
+function isLeapYear (date) {
+  date = date.getFullYear();
+
+  if (date % 4 === 0 && (date % 100 !== 0 || date % 400 === 0)) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 
@@ -75,15 +83,34 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => "00:00:00.250"
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
-function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+function timeSpanToString (startDate, endDate) {
+  var hours = endDate.getHours() - startDate.getHours();
+  var minutes = endDate.getMinutes() - startDate.getMinutes();
+  var seconds = endDate.getSeconds() - startDate.getSeconds();
+  var mseconds = endDate.getMilliseconds() - startDate.getMilliseconds();
+  if (hours < 10) {
+    hours = '0' + hours
+  }
+  if (minutes < 10) {
+    minutes = '0' + minutes
+  }
+  if (seconds < 10) {
+    seconds = '0' + seconds
+  }
+  if (mseconds < 100 && mseconds >= 10) {
+    mseconds = '0' + mseconds
+  }
+  if (mseconds < 10) {
+    mseconds = '00' + mseconds
+  }
+  return `${hours}:${minutes}:${seconds}.${mseconds}`
 }
 
 
 /**
  * Returns the angle (in radians) between the hands of an analog clock for the specified Greenwich time.
  * If you have problem with solution please read: https://en.wikipedia.org/wiki/Clock_angle_problem
- * 
+ *
  * @param {date} date
  * @return {number}
  *
@@ -93,15 +120,16 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,18, 0) => Math.PI
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
-function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+function angleBetweenClockHands (date) {
+  var angle = Math.abs((date.getUTCHours() * 60 + date.getUTCMinutes() - date.getUTCMinutes() * 12) / 2) % 360;
+  return (angle <= 180 ? angle : 360 - angle) / 180 * Math.PI;
 }
 
 
 module.exports = {
-    parseDataFromRfc2822: parseDataFromRfc2822,
-    parseDataFromIso8601: parseDataFromIso8601,
-    isLeapYear: isLeapYear,
-    timeSpanToString: timeSpanToString,
-    angleBetweenClockHands: angleBetweenClockHands
+  parseDataFromRfc2822: parseDataFromRfc2822,
+  parseDataFromIso8601: parseDataFromIso8601,
+  isLeapYear: isLeapYear,
+  timeSpanToString: timeSpanToString,
+  angleBetweenClockHands: angleBetweenClockHands
 };
